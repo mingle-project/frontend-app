@@ -5,7 +5,7 @@ const App = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>수연이 슬아 보고 싶당</Text>
+        <Text>수연이 슬아 보고 싶당 + 나도</Text>
       </View>
     </SafeAreaView>
   );
