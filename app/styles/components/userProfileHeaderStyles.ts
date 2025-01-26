@@ -6,21 +6,19 @@ export const SafeAreaView = styled.SafeAreaView`
 `;
 
 export const View = styled.View`
-  flex: 1;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 260px;
+  margin-top: 25px
 `;
 
-export const Text = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
+export const Image1 = styled.Image`
+  width: 35px;
+  height: 30px;
 `;
 
-export const Image = styled.Image`
-  width: 50px;
-  height: 50px;
-  margin: 10px;
-  resize-mode: contain;
-  background-color: #e0e0e0;
+export const Image2 = styled.Image`
+  width: 40px;
+  height: 45px;
 `;
