@@ -1,14 +1,37 @@
-import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { Modal, SafeAreaView, View, Text,TouchableOpacity } from 'react-native';
 import UserProfileHeader from '../../shared/components/header/userProfileHeader';
+import { useNavigation } from '@react-navigation/native';
+import Clipboard from '@react-native-clipboard/clipboard';
 import MingleLogoWhite1 from '../../assets/images/minglelogowhite1.png'
 import Pencil from '../../assets/images/pencil.png'
 import Rectangle from '../../assets/images/rectangle4.png'
 import * as UP from '../../styles/auth/userProfileStyles';
 
 const UserProfile = () => {
+  const navigation = useNavigation();
+  const [inviteModalVisible, setInviteModalVisible] = useState(false);
+
   const handleInvite = () => {
-    alert('그룹으로 초대하시겠습니까?');
+    setInviteModalVisible(true);
+  };
+
+  const closeInviteModal = () => {
+    setInviteModalVisible(false);
+  }
+
+  const handleCopyCode = () => {
+    const groupCode = "da800756";
+    Clipboard.setString(groupCode); 
+
+    Clipboard.getString().then((copiedText) => {
+      if (copiedText === groupCode) {
+        alert('코드가 복사되었습니다!');
+      } else {
+        alert('복사 실패! 다시 시도해주세요.');
+      }
+    });
+    closeInviteModal();
   };
 
   const handleLogout = () => {
@@ -62,6 +85,26 @@ const UserProfile = () => {
               <UP.ButtonText2>로그아웃</UP.ButtonText2>
             </UP.LogoutButton>
         </UP.View>
+
+        <Modal
+          transparent={true}
+          visible = {inviteModalVisible}
+          animationType="slide"
+          onRequestClose={closeInviteModal}
+        >
+          <UP.ModalContainer>
+            <UP.ModalContent>
+              <UP.CodeBox>da800756</UP.CodeBox>
+              <UP.ModalText>그룹 코드를 복사해서 친구들을 초대하세요!</UP.ModalText>
+              <UP.CopyButton onPress={handleCopyCode}>
+                <UP.CopyButtonText>코드 복사하기</UP.CopyButtonText>
+              </UP.CopyButton>
+              <UP.CloseButton onPress={closeInviteModal}>
+                <UP.CloseButtonText>닫기</UP.CloseButtonText>
+              </UP.CloseButton>
+            </UP.ModalContent>
+          </UP.ModalContainer>
+        </Modal>
     </UP.SafeAreaView>
   );
 };

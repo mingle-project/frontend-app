@@ -205,3 +205,57 @@ export const ButtonText2 = styled.Text`
   font-weight: bold;
   text-align: center;
 `;
+
+export const ModalContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+export const ModalContent = styled.View`
+  width: 85%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  align-items: center;
+`;
+
+export const ModalText = styled.Text`
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+
+export const CodeBox = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 12px 60px;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(170, 170, 170);
+`;
+
+export const CopyButton = styled.TouchableOpacity`
+  background-color:rgb(90, 90, 90);
+  padding: 12px 60px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+`;
+
+export const CopyButtonText = styled.Text`
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const CloseButton = styled.TouchableOpacity`
+  padding: 10px;
+`;
+
+export const CloseButtonText = styled.Text`
+  color: rgb(90, 90, 90);
+  font-size: 17px;
+  font-weight: bold;
+`;
