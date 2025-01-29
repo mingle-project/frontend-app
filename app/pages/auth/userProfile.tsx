@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, SafeAreaView, View, Text,TouchableOpacity } from 'react-native';
+import { Modal, SafeAreaView, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import UserProfileHeader from '../../shared/components/header/userProfileHeader';
 import { useNavigation } from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
@@ -11,6 +11,39 @@ import * as UP from '../../styles/auth/userProfileStyles';
 const UserProfile = () => {
   const navigation = useNavigation();
   const [inviteModalVisible, setInviteModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [groupName, setGroupName] = useState("은하");
+  const [tempGroupName, setTempGroupName] = useState(groupName);
+  const [userName, setUserName] = useState("진선");
+  const [tempUserName, setTempUserName] = useState(userName);
+  const [editUserNameModalVisible, setEditUserNameModalVisible] = useState(false);
+
+
+  const handleEditGroupName = () => {
+    setTempGroupName(groupName);
+    setEditModalVisible(true);
+  };
+
+  const handleSaveGroupName = () => {
+    setGroupName(tempGroupName); 
+    alert("그룹명이 변경되었습니다!");
+    setEditModalVisible(false);
+  };
+
+  const handleEditUserName = () => {
+    setTempUserName(userName);
+    setEditUserNameModalVisible(true);
+  };
+
+  const handleSaveUserName = () => {
+    setUserName(tempUserName);
+    alert("이름이 변경되었습니다!");
+    setEditUserNameModalVisible(false);
+  };
+
+  const closeEditModal = () => {
+    setEditModalVisible(false);
+  };
 
   const handleInvite = () => {
     setInviteModalVisible(true);
@@ -44,15 +77,19 @@ const UserProfile = () => {
         <UP.View>
             <UP.Image1 source={MingleLogoWhite1}/>
             <UP.GroupName>
-              <UP.Text>은하</UP.Text>
-              <UP.Image2 source={Pencil}/>
+              <UP.Text>{groupName}</UP.Text>
+              <TouchableOpacity onPress={handleEditGroupName}>
+                <UP.Image2 source={Pencil} />
+              </TouchableOpacity>
             </UP.GroupName>
             <UP.Text2>알아가는 사이</UP.Text2>
             <UP.User>
               <UP.Name>
                 <UP.Nickname>닉네임</UP.Nickname>
-                <UP.NameTrue>진선</UP.NameTrue>
-                <UP.Image3 source={Pencil}/>
+                <UP.NameTrue>{userName}</UP.NameTrue>
+                <TouchableOpacity onPress={handleEditUserName}>
+                  <UP.Image3 source={Pencil} />
+                </TouchableOpacity>
               </UP.Name>
               <UP.ID>
                 <UP.IDTitle>아이디</UP.IDTitle>
@@ -88,6 +125,54 @@ const UserProfile = () => {
 
         <Modal
           transparent={true}
+          visible={editModalVisible}
+          animationType="slide"
+          onRequestClose={closeEditModal}
+        >
+          <UP.ModalContainer>
+            <UP.ModalContent>
+              <UP.TextInput
+                value={tempGroupName}
+                onChangeText={setTempGroupName}
+                placeholder="그룹명을 입력하세요"
+              />
+              <UP.GroupButton>
+                <UP.CopyButton2 onPress={handleSaveGroupName}>
+                  <UP.CopyButtonText>수정</UP.CopyButtonText>
+                </UP.CopyButton2>
+                <UP.CloseButton2 onPress={closeEditModal}>
+                  <UP.CloseButtonText>취소</UP.CloseButtonText>
+                </UP.CloseButton2>
+              </UP.GroupButton>
+            </UP.ModalContent>
+          </UP.ModalContainer>
+        </Modal>
+        <Modal
+          transparent={true}
+          visible={editUserNameModalVisible}
+          animationType="slide"
+          onRequestClose={() => setEditUserNameModalVisible(false)}
+        >
+          <UP.ModalContainer>
+            <UP.ModalContent>
+              <UP.TextInput
+                value={tempUserName}
+                onChangeText={setTempUserName}
+                placeholder="이름을 입력하세요"
+              />
+              <UP.GroupButton>
+                <UP.CopyButton2 onPress={handleSaveUserName}>
+                  <UP.CopyButtonText>수정</UP.CopyButtonText>
+                </UP.CopyButton2>
+                <UP.CloseButton2 onPress={() => setEditUserNameModalVisible(false)}>
+                  <UP.CloseButtonText>취소</UP.CloseButtonText>
+                </UP.CloseButton2>
+              </UP.GroupButton>
+            </UP.ModalContent>
+          </UP.ModalContainer>
+        </Modal>
+        <Modal
+          transparent={true}
           visible = {inviteModalVisible}
           animationType="slide"
           onRequestClose={closeInviteModal}
@@ -97,10 +182,10 @@ const UserProfile = () => {
               <UP.CodeBox>da800756</UP.CodeBox>
               <UP.ModalText>그룹 코드를 복사해서 친구들을 초대하세요!</UP.ModalText>
               <UP.CopyButton onPress={handleCopyCode}>
-                <UP.CopyButtonText>코드 복사하기</UP.CopyButtonText>
+                <UP.CopyButtonText2>코드 복사하기</UP.CopyButtonText2>
               </UP.CopyButton>
               <UP.CloseButton onPress={closeInviteModal}>
-                <UP.CloseButtonText>닫기</UP.CloseButtonText>
+                <UP.CloseButtonText2>닫기</UP.CloseButtonText2>
               </UP.CloseButton>
             </UP.ModalContent>
           </UP.ModalContainer>
