@@ -33,8 +33,9 @@ export const Text = styled.Text`
 
 export const Image2 = styled.Image`
   width: 20px;
-  height: 23px;
-  margin-top: 6%;
+  height: 22px;
+  margin-top: 125%;
+  position: relative;
 `;
 
 export const Text2 = styled.Text`
@@ -72,10 +73,12 @@ export const NameTrue = styled.Text`
 `;
 
 export const Image3 = styled.Image`
-  width: 15px;
+  width: 16px;
   height: 18px;
-  margin-top: 2%;
-  margin-left: -3%;
+  //margin-top: 2%;
+  position: absolute;
+  left: -15px; /* 왼쪽으로 이동 */
+  top: -27%;
 `;
 
 export const ID = styled.View`
@@ -221,6 +224,46 @@ export const ModalContent = styled.View`
   align-items: center;
 `;
 
+export const TextInput = styled.TextInput`
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  border-width: 1.5;
+  border-radius: 18px;
+  width: 75%;
+  text-align: center;
+  background-color: white;
+  margin-bottom: 6%;
+`;
+
+export const GroupButton = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: 5%;
+`;
+
+export const CloseButton2 = styled.TouchableOpacity`
+  padding: 12px 50px;
+  border-width: 2px;
+  border-color: #555;
+  color: #555;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background-color: #555;
+`;
+
+export const CopyButton2 = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  padding: 12px 50px;
+  border-radius: 18px;
+  border-color: #555;
+  color: #555;
+  border-width: 2px;
+`;
+
 export const ModalText = styled.Text`
   font-size: 16px;
   margin-bottom: 20px;
@@ -234,7 +277,6 @@ export const CodeBox = styled.Text`
   padding: 12px 60px;
   border-radius: 25px;
   margin-bottom: 20px;
-  border: 1px solid rgb(170, 170, 170);
 `;
 
 export const CopyButton = styled.TouchableOpacity`
@@ -245,8 +287,8 @@ export const CopyButton = styled.TouchableOpacity`
 `;
 
 export const CopyButtonText = styled.Text`
-  color: white;
-  font-size: 16px;
+  color: rgb(90, 90, 90);
+  font-size: 17px;
   font-weight: bold;
 `;
 
@@ -255,7 +297,19 @@ export const CloseButton = styled.TouchableOpacity`
 `;
 
 export const CloseButtonText = styled.Text`
-  color: rgb(90, 90, 90);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const CopyButtonText2 = styled.Text`
+  color: white;
   font-size: 17px;
+  font-weight: bold;
+`;
+
+export const CloseButtonText2 = styled.Text`
+  color:rgb(90, 90, 90);
+  font-size: 16px;
   font-weight: bold;
 `;
