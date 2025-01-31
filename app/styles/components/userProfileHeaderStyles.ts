@@ -39,7 +39,7 @@ export const ModalContent = styled.View`
   shadow-radius: 4px;
   display: flex;
   position: absolute;
-  top: 180px;
+  top: 130px;
   right: 50px;
 `;
 
