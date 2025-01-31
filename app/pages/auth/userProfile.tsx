@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Modal, SafeAreaView, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Modal, SafeAreaView, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import UserProfileHeader from '../../shared/components/header/userProfileHeader';
 import { useNavigation } from '@react-navigation/native';
 import Clipboard from '@react-native-clipboard/clipboard';
+//import { Picker } from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
 import MingleLogoWhite1 from '../../assets/images/minglelogowhite1.png'
 import Pencil from '../../assets/images/pencil.png'
 import Rectangle from '../../assets/images/rectangle4.png'
@@ -12,11 +14,18 @@ const UserProfile = () => {
   const navigation = useNavigation();
   const [inviteModalVisible, setInviteModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editGroupInfoModalVisible, setEditGroupInfoModalVisible] = useState(false);
   const [groupName, setGroupName] = useState("은하");
   const [tempGroupName, setTempGroupName] = useState(groupName);
   const [userName, setUserName] = useState("진선");
   const [tempUserName, setTempUserName] = useState(userName);
+  const [groupGender, setGroupGender] = useState("여자");
+  const [groupAge, setGroupAge] = useState("10대");
+  const [groupCloseness, setGroupCloseness] = useState("알아가는 사이");
   const [editUserNameModalVisible, setEditUserNameModalVisible] = useState(false);
+  const [genderPickerVisible, setGenderPickerVisible] = useState(false);
+  const [agePickerVisible, setAgePickerVisible] = useState(false);
+  const [closenessPickerVisible, setClosenessPickerVisible] = useState(false);
 
 
   const handleEditGroupName = () => {
@@ -53,6 +62,15 @@ const UserProfile = () => {
     setInviteModalVisible(false);
   }
 
+  const handleEditGroupInfo = () => {
+    setEditGroupInfoModalVisible(true);
+  };
+
+  const handleSaveGroupInfo = () => {
+    alert("그룹 정보가 변경되었습니다!");
+    setEditGroupInfoModalVisible(false);
+  };
+
   const handleCopyCode = () => {
     const groupCode = "da800756";
     Clipboard.setString(groupCode); 
@@ -82,7 +100,7 @@ const UserProfile = () => {
                 <UP.Image2 source={Pencil} />
               </TouchableOpacity>
             </UP.GroupName>
-            <UP.Text2>알아가는 사이</UP.Text2>
+            <UP.Text2>{groupCloseness}</UP.Text2>
             <UP.User>
               <UP.Name>
                 <UP.Nickname>닉네임</UP.Nickname>
@@ -99,15 +117,17 @@ const UserProfile = () => {
             <UP.Group>
               <UP.Group2>
                 <UP.GroupInformation>은하 정보</UP.GroupInformation>
-                <UP.Image4 source={Pencil}/>
+                <TouchableOpacity onPress={handleEditGroupInfo}>
+                  <UP.Image4 source={Pencil}/>
+                </TouchableOpacity>
               </UP.Group2>
               <UP.GroupSex>
                 <UP.GroupSexTitle>성별</UP.GroupSexTitle>
-                <UP.GroupSexContent>여자</UP.GroupSexContent>
+                <UP.GroupSexContent>{groupGender}</UP.GroupSexContent>
               </UP.GroupSex>
               <UP.GroupAge>
                 <UP.GroupAgeTitle>나이</UP.GroupAgeTitle>
-                <UP.GroupAgeContent>10대</UP.GroupAgeContent>
+                <UP.GroupAgeContent>{groupAge}</UP.GroupAgeContent>
               </UP.GroupAge>
               <UP.GroupMember>
                 <UP.GroupMemberTitle>멤버</UP.GroupMemberTitle>
@@ -170,6 +190,94 @@ const UserProfile = () => {
               </UP.GroupButton>
             </UP.ModalContent>
           </UP.ModalContainer>
+        </Modal>
+        <Modal
+          transparent={true}
+          visible={editGroupInfoModalVisible}
+          animationType="slide"
+          onRequestClose={() => setEditGroupInfoModalVisible(false)}
+        >
+          <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+            <UP.ModalContainer>
+              <UP.ModalContent>
+                <UP.ModalTitle>그룹 정보 수정</UP.ModalTitle>
+                <UP.GroupRow>
+                  <UP.GroupLabel>성별:</UP.GroupLabel>
+                  <TouchableOpacity onPress={() => setGenderPickerVisible(true)}>
+                    <UP.PickerContainer>
+                      <UP.PickerText>{groupGender || "선택하세요"}</UP.PickerText>
+                    </UP.PickerContainer>
+                  </TouchableOpacity>
+                  {genderPickerVisible && (
+                    <UP.OptionsWrapper>
+                      <UP.OptionsContainer>
+                        {["여자", "남자", "혼성"].map((option) => (
+                          <TouchableOpacity key={option} onPress={() => {
+                            setGroupGender(option);
+                            setGenderPickerVisible(false);
+                          }}>
+                            <UP.OptionText>{option}</UP.OptionText>
+                          </TouchableOpacity>
+                        ))}
+                      </UP.OptionsContainer>
+                    </UP.OptionsWrapper>
+                  )}
+                </UP.GroupRow>
+                <UP.GroupRow>
+                  <UP.GroupLabel>연령대:</UP.GroupLabel>
+                  <TouchableOpacity onPress={() => setAgePickerVisible(true)}>
+                    <UP.PickerContainer>
+                      <UP.PickerText>{groupAge || "선택하세요"}</UP.PickerText>
+                    </UP.PickerContainer>
+                  </TouchableOpacity>
+                  {agePickerVisible && (
+                    <UP.OptionsWrapper>
+                      <UP.OptionsContainer>
+                        {["10대", "20대", "30대", "40대 이상"].map((option) => (
+                          <TouchableOpacity key={option} onPress={() => {
+                            setGroupAge(option);
+                            setAgePickerVisible(false);
+                          }}>
+                            <UP.OptionText>{option}</UP.OptionText>
+                          </TouchableOpacity>
+                        ))}
+                      </UP.OptionsContainer>
+                    </UP.OptionsWrapper>
+                  )}
+                </UP.GroupRow>
+                <UP.GroupRow>
+                  <UP.GroupLabel>친밀도:</UP.GroupLabel>
+                  <TouchableOpacity onPress={() => setClosenessPickerVisible(true)}>
+                    <UP.PickerContainer>
+                      <UP.PickerText>{groupCloseness || "선택하세요"}</UP.PickerText>
+                    </UP.PickerContainer>
+                  </TouchableOpacity>
+                  {closenessPickerVisible && (
+                    <UP.OptionsWrapper>
+                      <UP.OptionsContainer>
+                        {["알아가는 사이", "편한 사이", "비밀 없는 사이"].map((option) => (
+                          <TouchableOpacity key={option} onPress={() => {
+                            setGroupCloseness(option);
+                            setClosenessPickerVisible(false);
+                          }}>
+                            <UP.OptionText>{option}</UP.OptionText>
+                          </TouchableOpacity>
+                        ))}
+                      </UP.OptionsContainer>
+                    </UP.OptionsWrapper>
+                  )}
+                </UP.GroupRow>
+                <UP.ModalButtonContainer>
+                  <UP.CancelButton onPress={() => setEditGroupInfoModalVisible(false)}>
+                    <UP.ButtonText>취소</UP.ButtonText>
+                  </UP.CancelButton>
+                  <UP.SaveButton onPress={handleSaveGroupInfo}>
+                    <UP.ButtonText>수정</UP.ButtonText>
+                  </UP.SaveButton>
+                </UP.ModalButtonContainer>
+              </UP.ModalContent>
+            </UP.ModalContainer>
+          </KeyboardAvoidingView>
         </Modal>
         <Modal
           transparent={true}
