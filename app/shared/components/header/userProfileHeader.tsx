@@ -14,34 +14,47 @@ import * as UPH from '../../../styles/components/userProfileHeaderStyles';
 const UserProfileHeader = () => {
   const navigation = useNavigation();
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
+  const [leaveGroupModalVisible, setLeaveGroupModalVisible] = useState(false);
+  const [deleteGroupModalVisible, setDeleteGroupModalVisible] = useState(false);
+  const [groupNameInput, setGroupNameInput] = useState('');
+
+  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
 
   const openSettingsModal = () => {
     setSettingsModalVisible(true);
   };
-
   const closeSettingsModal = () => {
     setSettingsModalVisible(false);
   };
 
-  const [setButtonPosition, setSetButtonPosition] = useState({x:0, y:0});
-
-  const [leaveGroupModalVisible, setLeaveGroupModalVisible] = useState(false);
-
   const openLeaveGroupModal = () => {
-    console.log("openLeaveGroupModal 실행됨");
     setSettingsModalVisible(false);
-    setTimeout(() => {
-      console.log("leaveGroupModalVisible 활성화");
-      setLeaveGroupModalVisible(true);
-    }, 300);
-  };  
-  
-  const closeLeaveGroupModal = () => {
-    setLeaveGroupModalVisible(false);
+    setTimeout(() => setLeaveGroupModalVisible(true), 300);
+  };
+  const closeLeaveGroupModal = () => setLeaveGroupModalVisible(false);
+
+  const openDeleteGroupModal = () => {
+    setSettingsModalVisible(false);
+    setTimeout(() => setDeleteGroupModalVisible(true), 300);
+  };
+
+  const closeDeleteGroupModal = () => {
+    setGroupNameInput(''); 
+    setDeleteGroupModalVisible(false);
   };
 
   const handleLeaveGroup = () => {
     alert('그룹에서 나갔습니다.');
+    closeLeaveGroupModal();
+  };
+
+  const handleDeleteGroup = () => {
+    if (groupNameInput !== '은하') {
+      alert('그룹 이름이 일치하지 않습니다.');
+      return;
+    }
+    alert('그룹이 삭제되었습니다.');
+    closeDeleteGroupModal();
   };
 
   return (
@@ -53,7 +66,7 @@ const UserProfileHeader = () => {
         <TouchableOpacity 
           onLayout={(event) => {
             event.target.measure((_fx, _fy, _width, _height, px, py) => {
-              setSetButtonPosition({ x: px, y: py });
+              setButtonPosition({ x: px, y: py });
             });
           }}
           onPress={openSettingsModal}
@@ -61,7 +74,6 @@ const UserProfileHeader = () => {
           <UPH.Image2 source={Set}/>
         </TouchableOpacity>
       </UPH.View>
-
       <Modal
         transparent={true}
         visible={settingsModalVisible}
@@ -89,7 +101,7 @@ const UserProfileHeader = () => {
               <UPH.MenuIcon source={Logout}/>
               <UPH.MenuText>그룹 나가기</UPH.MenuText>
             </UPH.MenuItem>
-            <UPH.MenuItem>
+            <UPH.MenuItem onPress={openDeleteGroupModal}>
             <UPH.MenuIcon source={Delete}/>
             <UPH.MenuText>그룹 삭제</UPH.MenuText>
             </UPH.MenuItem>
@@ -118,6 +130,33 @@ const UserProfileHeader = () => {
                   </UPH.CancelButton>
                   <UPH.LeaveButton onPress={handleLeaveGroup}>
                     <UPH.ButtonText>나가기</UPH.ButtonText>
+                  </UPH.LeaveButton>
+                </UPH.ButtonContainer>
+              </UPH.LeaveGroupContainer>
+            </UPH.Overlay>
+          </Modal>
+          <Modal transparent visible={deleteGroupModalVisible} animationType="fade" onRequestClose={closeDeleteGroupModal}>
+            <UPH.Overlay>
+              <UPH.LeaveGroupContainer>
+                <UPH.DeleteGroupTitle>그룹을 삭제하시겠어요?</UPH.DeleteGroupTitle>
+                <UPH.DeleteGroupText>
+                  그룹 삭제 시 그룹과 관련된{'\n'}
+                  모든 데이터와 기록이 영구 삭제됩니다.{'\n'}
+                  {'\n'}
+                  삭제를 확인하려면{'\n'}
+                  아래에 그룹 이름을 입력해 주세요.
+                </UPH.DeleteGroupText>
+                <UPH.Input
+                  placeholder="그룹 이름 입력"
+                  value={groupNameInput}
+                  onChangeText={setGroupNameInput}
+                />
+                <UPH.ButtonContainer>
+                  <UPH.CancelButton onPress={closeDeleteGroupModal}>
+                    <UPH.ButtonText>취소</UPH.ButtonText>
+                  </UPH.CancelButton>
+                  <UPH.LeaveButton onPress={handleDeleteGroup}>
+                    <UPH.ButtonText>삭제</UPH.ButtonText>
                   </UPH.LeaveButton>
                 </UPH.ButtonContainer>
               </UPH.LeaveGroupContainer>
