@@ -131,3 +131,30 @@ export const ButtonText = styled.Text`
   font-weight: bold;
   color: white;
 `;
+
+export const DeleteGroupTitle = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+  color: #606060;
+  margin-bottom: 13%;
+  margin-top: 3%;
+`;
+
+export const DeleteGroupText = styled.Text`
+  font-size: 15.6px;
+  color: #606060;
+  text-align: center;
+  margin-bottom: 13%;
+  line-height: 24px;
+`;
+
+export const Input = styled.TextInput`
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #606060;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+`;
