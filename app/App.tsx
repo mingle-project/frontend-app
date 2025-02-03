@@ -3,7 +3,7 @@ import {SafeAreaView, View, Text} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import userProfile from './pages/auth/userProfile';
-import introductionHeader from './shared/components/header/introductionHeader';
+import introduction from './pages/introduction/introduction';
 import * as A from "./styles/AppStyles";
 
 const Stack = createStackNavigator();
@@ -16,8 +16,8 @@ const MainScreen = ({ navigation }) => {
         <A.Button onPress={() => navigation.navigate('userProfile')}>
           <A.ButtonText>회원 정보 페이지로 이동</A.ButtonText>
         </A.Button>
-        <A.Button onPress={() => navigation.navigate('introductionHeader')}>
-          <A.ButtonText>소개 페이지 헤더로 이동</A.ButtonText>
+        <A.Button onPress={() => navigation.navigate('introduction')}>
+          <A.ButtonText>프로젝트 소개 페이지로 이동</A.ButtonText>
         </A.Button>
       </A.View>
     </A.SafeAreaView>
@@ -40,9 +40,9 @@ const App = () => {
             options={{ title: '회원 정보 페이지' }}
           />
           <Stack.Screen
-            name="introductionHeader"
-            component={introductionHeader}
-            options={{ title: '프로젝트 소개 헤더 페이지' }}
+            name="introduction"
+            component={introduction}
+            options={{ title: '프로젝트 소개 페이지' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
