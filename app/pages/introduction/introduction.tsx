@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
 import * as I from '../../styles/introduction/introductionStyles';
 import IntroductionHeader from '../../shared/components/header/introductionHeader';
+import IntroductionFooter from '../../shared/components/footer/introductionFooter';
 import MingleLogoWhite1 from '../../assets/images/minglelogowhite1.png';
 import Star1 from '../../assets/images/stardust0.png';
 import Star2 from '../../assets/images/stardust1.png';
@@ -20,6 +21,7 @@ const Introduction = () => {
                     <I.Text2>하나의 별을 완성한다</I.Text2>
                 </I.Text>
             </I.ContentView>
+            <IntroductionFooter/>
         </I.SafeAreaView>
     );
 };

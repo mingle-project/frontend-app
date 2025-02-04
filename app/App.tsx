@@ -16,9 +16,9 @@ const MainScreen = ({ navigation }) => {
         <A.Button onPress={() => navigation.navigate('userProfile')}>
           <A.ButtonText>회원 정보 페이지로 이동</A.ButtonText>
         </A.Button>
-        <A.Button onPress={() => navigation.navigate('introduction')}>
+        {/* <A.Button onPress={() => navigation.navigate('introduction')}>
           <A.ButtonText>프로젝트 소개 페이지로 이동</A.ButtonText>
-        </A.Button>
+        </A.Button> */}
       </A.View>
     </A.SafeAreaView>
   );
