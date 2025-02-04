@@ -91,9 +91,12 @@ const UserProfileHeader = () => {
             <UPH.MenuIcon source={Help}/>
             <UPH.MenuText>도움말</UPH.MenuText>
             </UPH.MenuItem>
-            <UPH.MenuItem>
-            <UPH.MenuIcon source={Computer}/>
-            <UPH.MenuText>프로젝트 소개</UPH.MenuText>
+            <UPH.MenuItem onPress={() => {
+                closeSettingsModal();  
+                navigation.navigate('introduction');  
+              }}>
+              <UPH.MenuIcon source={Computer}/>
+              <UPH.MenuText>프로젝트 소개</UPH.MenuText>
             </UPH.MenuItem>
             <UPH.MenuItem onPress={() => {
               openLeaveGroupModal();

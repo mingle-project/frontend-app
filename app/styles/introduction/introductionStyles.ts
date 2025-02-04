@@ -14,7 +14,7 @@ export const ContentView = styled.View`
 export const Star1 = styled.Image`
   width: 80px;
   height: 80px;
-  margin-top: -92%;
+  margin-top: -100%;
   margin-left: -40%;
 `;
 
@@ -22,13 +22,14 @@ export const Star2 = styled.Image`
   width: 92px;
   height: 92px;
   margin-right: -55%;
-  margin-top: -7%;
+  margin-top: -5%;
 `;
 
 export const MingleLogoWhite1 = styled.Image`
   width: 130px;
   height: 130px;
-  margin-top: 0%;
+  margin-top: 1%;
+  margin-bottom: 10%;
   margin-left: -20%;
 `;
 
@@ -36,7 +37,7 @@ export const Text = styled.Text`
   text-align: center;
   font-weight: bold;
   font-size: 23px;
-  margin-top: 10%;
+  margin-top: -5%;
   color: white;
 `;
 
