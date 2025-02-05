@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import userProfile from './pages/auth/userProfile';
 import introduction from './pages/introduction/introduction';
+import introduction1 from './pages/introduction/introduction1';
 import * as A from "./styles/AppStyles";
 
 const Stack = createStackNavigator();
@@ -16,7 +17,7 @@ const MainScreen = ({ navigation }) => {
         <A.Button onPress={() => navigation.navigate('userProfile')}>
           <A.ButtonText>회원 정보 페이지로 이동</A.ButtonText>
         </A.Button>
-        {/* <A.Button onPress={() => navigation.navigate('introduction')}>
+        {/* <A.Button onPress={() => navigation.navigate('introduction1')}>
           <A.ButtonText>프로젝트 소개 페이지로 이동</A.ButtonText>
         </A.Button> */}
       </A.View>
@@ -42,6 +43,11 @@ const App = () => {
           <Stack.Screen
             name="introduction"
             component={introduction}
+            options={{ title: '프로젝트 소개 페이지' }}
+          />
+          <Stack.Screen
+            name="introduction1"
+            component={introduction1}
             options={{ title: '프로젝트 소개 페이지' }}
           />
         </Stack.Navigator>
