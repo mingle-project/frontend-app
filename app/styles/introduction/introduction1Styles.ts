@@ -9,7 +9,7 @@ export const ContentView = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-top: -200%;
+  margin-top: -180%;
   gap: 5%;
 `;
 
