@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import userProfile from './pages/auth/userProfile';
 import introduction from './pages/introduction/introduction';
 import introduction1 from './pages/introduction/introduction1';
+import introduction2 from './pages/introduction/introduction2';
 import * as A from "./styles/AppStyles";
 
 const Stack = createStackNavigator();
@@ -48,6 +49,11 @@ const App = () => {
           <Stack.Screen
             name="introduction1"
             component={introduction1}
+            options={{ title: '프로젝트 소개 페이지' }}
+          />
+          <Stack.Screen
+            name="introduction2"
+            component={introduction2}
             options={{ title: '프로젝트 소개 페이지' }}
           />
         </Stack.Navigator>
